@@ -20,7 +20,7 @@ class MenuScreen(Screen):
     def __init__(self, **kw):
         super(MenuScreen, self).__init__(**kw)
         box = BoxLayout(orientation='vertical')
-        box.add_widget(Label(text=u'Приложение для Ксюши❤', font_size=30))
+        box.add_widget(Label(text=u'Приложение для Ксюши', font_size=30))
         box.add_widget(Button(text='Начать', size_hint=(1, .2), on_press=lambda x: set_screen('main')))
         self.add_widget(box)
 
