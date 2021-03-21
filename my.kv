@@ -1,0 +1,72 @@
+#:kivy 2.0.0
+
+ScreenManager:
+    id: screen_manager
+    MenuScreen:
+        id: menu_screen
+        name: 'menu'
+        manager: 'screen_manager'
+    MainScreen:
+        id: screen_manager
+        name: 'main'
+        manager: 'screen_manager'
+    EndingScreen:
+        id: ending_screen
+        name: 'end'
+        manager: 'screen_manager'
+
+<MenuScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Приложение'
+            font_size: 30
+            color: (0, 0, 0, 1)
+        Button:
+            text: 'Начать'
+            size_hint: (1, .2)
+            background_normal: ''
+            background_color: [.2, .2, .2, 1]
+            on_press: app.root.current = 'main'
+
+<MainScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        label: label.__self__
+        Label:
+            id: label
+            text: root.text
+            font_size: 15
+            color: (0, 0, 0, 1)
+        BoxLayout:
+            Button:
+                text: '<--'
+                font_size: 45
+                color: [0, 0, 0, 1]
+                background_normal: ''
+                background_color: [.2, .2, .2, 1]
+                size_hint: (1, .2)
+                on_press: root.change_ex_prev(label)
+            Button:
+                text: '-->'
+                font_size: 45
+                color: [0, 0, 0, 1]
+                background_normal: ''
+                background_color: [.2, .2, .2, 1]
+                size_hint: (1, .2)
+                on_press: root.change_ex_next(label)
+
+<EndingScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Поздравляю'
+            font_size: 35
+            color: (0, 0, 0, 1)
+        Button:
+            text: 'Закрыть'
+            size_hint: (1, .2)
+            color: [0, 0, 0, 1]
+            background_normal: ''
+            background_color: [.2, .2, .2, 1]
+            on_press: app.stop()
