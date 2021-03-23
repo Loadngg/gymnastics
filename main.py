@@ -1,6 +1,6 @@
 import kivy
 from kivy.app import App
-from kivy.uix.screenmanager import Screen
+from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.core.window import Window
 import exercising as ex
 
@@ -38,9 +38,16 @@ class EndingScreen(Screen):
 
 class MyApp(App):
     def build(self):
+        sm = ScreenManager()
+        sm.add_widget(MenuScreen(name='menu'))
+        sm.add_widget(MainScreen(name='main'))
+        sm.add_widget(EndingScreen(name='end'))
+
         Window.clearcolor = (1, 1, 1, 1)
         Window.size = (1920, 1080)
         Window.fullscreen = True
+
+        return sm
 
 
 if __name__ == "__main__":

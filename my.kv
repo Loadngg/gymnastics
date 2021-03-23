@@ -1,72 +1,87 @@
 #:kivy 2.0.0
 
-ScreenManager:
-    id: screen_manager
-    MenuScreen:
-        id: menu_screen
-        name: 'menu'
-        manager: 'screen_manager'
-    MainScreen:
-        id: screen_manager
-        name: 'main'
-        manager: 'screen_manager'
-    EndingScreen:
-        id: ending_screen
-        name: 'end'
-        manager: 'screen_manager'
-
 <MenuScreen>:
     BoxLayout:
         orientation: 'vertical'
+        size: root.width, root.height
+        padding: 20
+        spacing: 20
+
         Label:
             text: 'Приложение'
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
             font_size: 30
             color: (0, 0, 0, 1)
-        Button:
+
+        RoundedButton:
             text: 'Начать'
             size_hint: (1, .2)
-            background_normal: ''
-            background_color: [.2, .2, .2, 1]
             on_press: app.root.current = 'main'
 
 <MainScreen>:
     BoxLayout:
         orientation: 'vertical'
         label: label.__self__
+        size: root.width, root.height
+        padding: 20
+        spacing: 20
+
         Label:
             id: label
-            text: root.text
-            font_size: 15
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
+            text: 'Стоя у гимнастической стенки принять правильную осанку'
+            font_size: 25
             color: (0, 0, 0, 1)
+
         BoxLayout:
-            Button:
+            RoundedButton:
                 text: '<--'
                 font_size: 45
-                color: [0, 0, 0, 1]
-                background_normal: ''
-                background_color: [.2, .2, .2, 1]
+                color: [1, 1, 1, 1]
+                pos_hint: {'center_x': 0.5}
                 size_hint: (1, .2)
                 on_press: root.change_ex_prev(label)
-            Button:
+
+            RoundedButton:
                 text: '-->'
                 font_size: 45
-                color: [0, 0, 0, 1]
-                background_normal: ''
-                background_color: [.2, .2, .2, 1]
+                color: [1, 1, 1, 1]
+                pos_hint: {'center_x': 0.5}
                 size_hint: (1, .2)
                 on_press: root.change_ex_next(label)
 
 <EndingScreen>:
     BoxLayout:
         orientation: 'vertical'
+        size: root.width, root.height
+        padding: 20
+        spacing: 20
+
         Label:
             text: 'Поздравляю'
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
             font_size: 35
             color: (0, 0, 0, 1)
-        Button:
+
+        RoundedButton:
             text: 'Закрыть'
             size_hint: (1, .2)
             color: [0, 0, 0, 1]
-            background_normal: ''
-            background_color: [.2, .2, .2, 1]
             on_press: app.stop()
+
+<RoundedButton@Button>
+    background_color: (0, 0, 0, 0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (48/225, 84/225, 150/225, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [50]
