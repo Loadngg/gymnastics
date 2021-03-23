@@ -2,13 +2,14 @@ import kivy
 from kivy.app import App
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.core.window import Window
+# from kivy.animation import Animation
 import exercising as ex
 import pyttsx3
 
 kivy.require('2.0.0')
 
 tts = pyttsx3.init()
-tts.setProperty('rate', 250)
+tts.setProperty('rate', 225)
 tts.setProperty('volume', 1)
 
 
@@ -21,25 +22,41 @@ class MainScreen(Screen):
         self.i = 0
         super(MainScreen, self).__init__(**kw)
         self.text = ex.exercising_list[self.i]
+        tts_say(self.text)
 
-    def change_ex_next(self, exercising):
+    # def animation(self, widget):
+    #     anim = Animation(spacing=50)
+    #     anim.start(widget)
+
+    def change_ex_next(self, exercising, widget):
         if self.i == 24:
             self.i = 0
             sm.current = 'end'
-        self.i += 1
-        self.text = u'{}'.format(ex.exercising_list[self.i])
-        exercising.text = self.text
+        else:
+            self.i += 1
+            self.text = u'{}'.format(ex.exercising_list[self.i])
+            exercising.text = self.text
+            # self.animation(widget)
+            tts_say(self.text)
 
-    def change_ex_prev(self, exercising):
+    def change_ex_prev(self, exercising, widget):
         if self.i == 0:
             sm.current = 'menu'
-        self.i -= 1
-        self.text = u'{}'.format(ex.exercising_list[self.i])
-        exercising.text = self.text
+        else:
+            self.i -= 1
+            self.text = u'{}'.format(ex.exercising_list[self.i])
+            exercising.text = self.text
+            # self.animation(widget)
+            tts_say(self.text)
 
 
 class EndingScreen(Screen):
     pass
+
+
+def tts_say(text):
+    tts.say(text)
+    tts.runAndWait()
 
 
 class MyApp(App):

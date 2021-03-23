@@ -21,7 +21,9 @@
             on_press: app.root.current = 'main'
 
 <MainScreen>:
+    layout: layout.__self__
     BoxLayout:
+        id: layout
         orientation: 'vertical'
         label: label.__self__
         size: root.width, root.height
@@ -44,13 +46,13 @@
                 text: '<--'
                 font_size: 45
                 pos_hint: {'center_x': 0.5}
-                on_press: root.change_ex_prev(label)
+                on_press: root.change_ex_prev(label, None)
 
             RoundedButton:
                 text: '-->'
                 font_size: 45
                 pos_hint: {'center_x': 0.5}
-                on_press: root.change_ex_next(label)
+                on_press: root.change_ex_next(label, None)
 
 <EndingScreen>:
     BoxLayout:
@@ -81,7 +83,7 @@
     canvas.before:
         Color:
             rgba: (48/225, 84/225, 150/225, 1)
-            
+
         RoundedRectangle:
             size: self.size
             pos: self.pos
