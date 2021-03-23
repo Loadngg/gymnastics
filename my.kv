@@ -17,7 +17,7 @@
 
         RoundedButton:
             text: 'Начать'
-            size_hint: (1, .2)
+            font_size: 25
             on_press: app.root.current = 'main'
 
 <MainScreen>:
@@ -38,20 +38,18 @@
             color: (0, 0, 0, 1)
 
         BoxLayout:
+            spacing: 20
+
             RoundedButton:
                 text: '<--'
                 font_size: 45
-                color: [1, 1, 1, 1]
                 pos_hint: {'center_x': 0.5}
-                size_hint: (1, .2)
                 on_press: root.change_ex_prev(label)
 
             RoundedButton:
                 text: '-->'
                 font_size: 45
-                color: [1, 1, 1, 1]
                 pos_hint: {'center_x': 0.5}
-                size_hint: (1, .2)
                 on_press: root.change_ex_next(label)
 
 <EndingScreen>:
@@ -71,16 +69,19 @@
 
         RoundedButton:
             text: 'Закрыть'
-            size_hint: (1, .2)
-            color: [0, 0, 0, 1]
+            font_size: 25
             on_press: app.stop()
 
 <RoundedButton@Button>
     background_color: (0, 0, 0, 0)
+    size_hint: (1, .2)
+    color: (1, 1, 1, 1)
     background_normal: ''
+
     canvas.before:
         Color:
             rgba: (48/225, 84/225, 150/225, 1)
+            
         RoundedRectangle:
             size: self.size
             pos: self.pos
